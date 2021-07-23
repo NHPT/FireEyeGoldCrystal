@@ -4,7 +4,7 @@
 
 火眼金睛是一个GitHub监控和信息收集工具，支持监控和收集CVE、免杀、漏洞利用等内置关键字和自定义关键字。支持钉钉、Server酱和Telegram推送，过滤敏感词，查找包含关键字的所有仓库并输出到FEGC.xlsx文件。默认关键字列表有限，可通过文件指定关键字和敏感词，由于GitHub API速率限制，目前仅实现单线程。(FireEyeGoldCrystal is A GitHub Monitor and Infomation Collection Tools,It supports monitoring and collecting built-in keywords and custom keywords such as CVE, kill free, vulnerability exploitation, etc.Support DingTalk ,ServerChan and Telegram Push,Filter Sensitive Words,Find all warehouses containing keywords and output to the FEGC.xlsx file.The default keyword list is limited. You can specify keywords and sensitive words through files. Due to the rate limit of GitHub API, only single thread is implemented at present.)
 
-![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/Structure.png)
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/Structure.png)
 
 默认关键字列表(Default Keyword List)：
 ```
@@ -36,13 +36,13 @@ optional arguments:
 
 `py FireEyeGoldCrystal.py -c`
 
-![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/c.png)
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/c.png)
 
 `py FireEyeGoldCrystal.py -c -iF search.txt -sW black.txt`
 
-![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/c2.png)
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/c2.png)
 
-![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/result.png)
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/result.png)
 
 ## 监控模式
 
