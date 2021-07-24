@@ -48,7 +48,11 @@ def GetNewSearch():
     sl=len(SearchList)
     i=0
     while i<sl:
-        init = requests.get("https://api.github.com/search/repositories?q="+SearchList[i]+"&sort=updated",headers=head,proxies=proxies,timeout=timeout,verify=False).text
+        search_url = "https://api.github.com/search/repositories?q="+SearchList[i]+"&sort=updated"
+        try:
+            init = requests.get(search_url,headers=head,proxies=proxies,timeout=timeout,verify=False).text
+        except:
+            continue
         if 'API rate limit exceeded' in init:
             time.sleep(10)
             continue
