@@ -89,7 +89,11 @@ def GetNewSearch():
                         if Filter(desc):
                             continue
                     #print("仓库描述：",desc,"仓库链接：",newRes.get('html_url'))
-                    result.append({"存储库描述":desc,"存储库链接":newRes.get('html_url')})
+                    html_url=newRes.get('html_url')
+                    # 过滤黑名单用户
+                    if FilterUser(html_url):
+                        continue
+                    result.append({"存储库描述":desc,"存储库链接":html_url})
                 time.sleep(6)
         except Exception as e:
             print(e)
@@ -110,6 +114,9 @@ def GetOnePageData(jsonResp,sheet):
             if Filter(desc):
                 continue
         html_url=json_res.get('items')[i].get('html_url')
+        # 过滤黑名单用户
+        if FilterUser(html_url):
+            continue
         print(desc,html_url)
         # 写入sheet
         sheet.append([desc,html_url])
@@ -163,6 +170,14 @@ def Filter(msg):
             return True
     return False
 
+# 过滤黑名单用户
+def FilterUser(url):
+    user=url.split("/")[3]
+    if user in BlacklistUsers:
+        return True
+    else:
+        return False
+
 # Server酱推送
 def ServerChan(msg):
     # sckey为自己的server SCKEY
@@ -215,6 +230,9 @@ SearchList=["CVE-"+str(current_year) , "免杀" , "Bypass Antivirus" , "Exploit"
 
 # 敏感词列表
 SensitiveWords=[]
+
+# 黑名单用户
+BlacklistUsers=["thathttp01","thatjohn0a","thatjohn01"]
 
 if args.p:
     proxies=proxy(args.p)
