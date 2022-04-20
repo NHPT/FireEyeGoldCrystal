@@ -208,7 +208,7 @@ group.add_argument('-c',action='store_true',help='信息收集模式')
 parser.add_argument('-p',help='设置代理地址，如：http://127.0.0.1:8080')
 parser.add_argument('-t',help='设置超时时间，单位：秒')
 parser.add_argument('-H',help='设置HTTP请求头，json格式，如：{"X-Forwarded-For":"127.0.0.1"}')
-parser.add_argument('-mT',type=int,default=5,help='设置监控阈值，默认5分钟')
+parser.add_argument('-mT',type=int,default=5,help='设置监控阈值，单位：分，默认5分钟')
 parser.add_argument('-iF',type=argparse.FileType('r',encoding='utf8'),help='设置关键字文件')
 parser.add_argument('-sW',type=argparse.FileType('r',encoding='utf8'),help='设置敏感词文件')
 
