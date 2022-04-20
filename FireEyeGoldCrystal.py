@@ -51,7 +51,9 @@ def GetNewSearch():
         search_url = "https://api.github.com/search/repositories?q="+SearchList[i]+"&sort=updated"
         try:
             init = requests.get(search_url,headers=head,proxies=proxies,timeout=timeout,verify=False).text
-        except:
+        except Exception as e:
+            print(e)
+            time.sleep(10)
             continue
         if 'API rate limit exceeded' in init:
             time.sleep(10)
@@ -96,8 +98,8 @@ def GetNewSearch():
                     result.append({"存储库描述":desc,"存储库链接":html_url})
                 time.sleep(6)
         except Exception as e:
-            print(e)
-    #print(result)
+            print(time.strftime("%Y-%m-%d %H:%M:%S",time.localtime()),e)
+    print(result)
     if result:
         DingDing(result)
 
