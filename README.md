@@ -36,11 +36,11 @@ optional arguments:
 
 ## 信息收集模式(Information collection mode)
 
-`py FireEyeGoldCrystal.py -c`
+根据内置关键词收集存储库：`py FireEyeGoldCrystal.py -c`
 
 ![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/c.png)
 
-`py FireEyeGoldCrystal.py -c -iF search.txt -sW black.txt`
+根据指定关键词文件收集存储库：`py FireEyeGoldCrystal.py -c -iF search.txt -sW black.txt`
 
 ![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/c2.png)
 
@@ -48,7 +48,10 @@ optional arguments:
 
 ## 监控模式
 
-`py FireEyeGoldCrystal.py -m`
+根据内置关键词监控存储库：`py FireEyeGoldCrystal.py -m`
 
+根据指定关键词文件收集存储库，并过滤指定敏感词：`py FireEyeGoldCrystal.py -m -iF search.txt -sW black.txt`
 
-`py FireEyeGoldCrystal.py -m -iF search.txt -sW black.txt`
+根据内置关键词监控存储库，监控阈值为4小时，并输出日志文件：`python3 FireEyeGoldCrystal.py -m -mT 240 >fegc.log`
+
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/monitor.png)
