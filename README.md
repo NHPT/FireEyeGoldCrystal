@@ -26,8 +26,10 @@ optional arguments:
   -c          信息收集模式
   -p P        设置代理地址，如：http://127.0.0.1:8080
   -t T        设置超时时间，单位：秒
+  -r          是否实时推送
+  -d D        设置每天定时推送时间，默认为：09:00，需要使用24小时格式
   -H H        设置HTTP请求头，json格式，如：{"X-Forwarded-For":"127.0.0.1"}
-  -mT MT      设置监控阈值，默认5分钟
+  -mT MT      设置监控阈值，单位：分，默认5分钟
   -iF IF      设置关键字文件
   -sW SW      设置敏感词文件
 ```
@@ -48,10 +50,22 @@ optional arguments:
 
 ## 监控模式
 
-根据内置关键词监控存储库：`py FireEyeGoldCrystal.py -m`
+根据内置关键词监控存储库，并在每天09:00推送昨日存储库：`py FireEyeGoldCrystal.py -m`
 
 根据指定关键词文件收集存储库，并过滤指定敏感词：`py FireEyeGoldCrystal.py -m -iF search.txt -sW black.txt`
 
 根据内置关键词监控存储库，监控阈值为4小时，并输出日志文件：`python3 FireEyeGoldCrystal.py -m -mT 240 >fegc.log`
 
 ![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/monitor.png)
+
+根据内置关键词监控存储库，监控阈值为3小时，每天17:00推送24小时内的新存储库，同时启用实时推送：`python3 FireEyeGoldCrystal.py -m -mT 180 -r -d 17:00`
+
+新的推送消息格式：
+
+**企业微信**
+
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/wxmsg.png)
+
+**钉钉**
+
+![image](https://github.com/NHPT/FireEyeGoldCrystal/blob/main/images/dingmsg.png)
