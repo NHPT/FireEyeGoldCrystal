@@ -80,6 +80,8 @@ def headers(header):
 
 # 钉钉推送
 def DingDing(msg):
+    if not msg:
+        return
     timestamp = str(round(time.time() * 1000))
     secret_enc = secret.encode('utf-8')
     string_to_sign = '{}\n{}'.format(timestamp, secret)
