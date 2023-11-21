@@ -13,7 +13,6 @@ from bs4 import BeautifulSoup
 import random
 
 result=[]
-flag = False
 
 # 钉钉机器人的加签密钥
 secret = ''
@@ -23,8 +22,7 @@ webhook = ''
 wxwork_url=''
 
 def clearResult():
-    global flag
-    flag = True
+    result.clear()
 
 def get_bing_wallpapers_of_the_day():
     # 设置用户代理标头
@@ -106,10 +104,6 @@ def DingDing(msg):
     }
 }
     r=requests.post(url,json=json,headers=head,proxies=proxies,timeout=timeout,verify=False)
-    global result,flag
-    if flag:
-        result.clear()
-        flag = False
     #print(r.text)
 
 # 企业微信推送
@@ -128,10 +122,6 @@ def WXWork(msg):
         })
     # 指定机器人发送消息
     resp = requests.post(wxwork_url,data,auth=('Content-Type', 'application/json'))
-    global result,flag
-    if flag:
-        result.clear()
-        flag = False
     #print(resp.json)
 
 # 获取GitHub存储库更新信息
