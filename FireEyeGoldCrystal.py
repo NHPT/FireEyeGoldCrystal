@@ -24,38 +24,27 @@ wxwork_url=''
 def clearResult():
     result.clear()
 
-def get_bing_wallpapers_of_the_day():
-    # 设置用户代理标头
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
-    }
+def get_all_bing_daily_wallpapers(num_wallpapers=8):
+    wallpaper_urls = []  # 初始化一个空的壁纸地址列表
 
-    # 发送HTTP请求获取页面内容
-    url = 'https://bing.ioliu.cn/'
-    response = requests.get(url, headers=headers)
+    # 获取Bing每日壁纸的API地址，设置n参数以获取多天的壁纸
+    url = f"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n={num_wallpapers}&mkt=en-US"
 
-    # 检查响应是否成功
-    if response.status_code == 200:
-        # 使用Beautiful Soup解析页面内容
-        soup = BeautifulSoup(response.text, 'html.parser')
+    # 发送HTTP GET请求获取JSON数据
+    response = requests.get(url)
+    data = json.loads(response.text)
 
-        # 找到所有壁纸的图片元素
-        image_elements = soup.find_all('img', class_='progressive__img')
+    # 构建完整的壁纸URL列表
+    bing_base_url = "https://www.bing.com"
+    for image_data in data['images']:
+        wallpaper_url = urllib.parse.urljoin(bing_base_url, image_data['url'])
+        wallpaper_urls.append(wallpaper_url)  # 将壁纸URL添加到列表中
 
-        # 获取所有壁纸的URL并添加到列表
-        wallpaper_urls = []
-        for image_element in image_elements:
-            wallpaper_url = image_element['data-progressive']
-            wallpaper_urls.append(wallpaper_url)
-
-        return wallpaper_urls
-    else:
-        print('请求失败，状态码:', response.status_code)
-        return None
+    return wallpaper_urls
 
 def get_random_bing_wallpaper():
-    # 获取一天中所有Bing壁纸的URL列表
-    bing_wallpaper_urls = get_bing_wallpapers_of_the_day()
+    # 获取近8天Bing壁纸的URL列表
+    bing_wallpaper_urls = get_all_bing_daily_wallpapers()
     
     if bing_wallpaper_urls:
         # 随机选择一个壁纸URL
